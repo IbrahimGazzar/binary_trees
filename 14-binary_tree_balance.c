@@ -9,13 +9,22 @@
 
 int binary_tree_balance(const binary_tree_t *tree)
 {
-	int balance_left = 0, balance_right = 0;
+	int b_left = 0, b_right = 0;
+	binary_tree_t *ptr_left, *ptr_right;
 
 	if (tree == NULL)
 		return (0);
-	if (tree->left)
-		balance_left = 1 + binary_tree_balance(tree->left);
-	if (tree->right)
-		balance_right = 1 + binary_tree_balance(tree->right);
-	return (balance_left - balance_right);
+	ptr_left = tree->left;
+	while (ptr_left != NULL)
+	{
+		b_left++;
+		ptr_left = ptr_left->left;
+	}
+	ptr_right = tree->right;
+	while (ptr_right != NULL)
+	{
+		b_right++;
+		ptr_right = ptr_right->right;
+	}
+	return (b_left - b_right);
 }
